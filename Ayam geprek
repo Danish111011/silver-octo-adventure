@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ayam Geprek - Menu</title>
+  <style>
+    :root{
+      --bg:#0b0b0f;
+      --card:#141420;
+      --muted:#9aa0aa;
+      --text:#f4f6fb;
+      --accent:#ff3b3b;
+      --accent2:#ffcc00;
+      --ring: rgba(255,59,59,.25);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 500px at 20% 0%, rgba(255,59,59,.18), transparent 55%),
+                  radial-gradient(900px 400px at 90% 10%, rgba(255,204,0,.12), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    header{
+      display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+      padding:18px 18px;border:1px solid rgba(255,255,255,.08);
+      background:rgba(20,20,32,.65); border-radius:18px;
+      box-shadow:0 16px 60px rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
+    }
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{
+      width:44px;height:44px;border-radius:14px;
+      background: linear-gradient(135deg, var(--accent), #ff6a00);
+      display:grid;place-items:center;
+      box-shadow: 0 10px 30px rgba(255,59,59,.25);
+      font-weight:800;
+    }
+    .brand h1{font-size:18px;margin:0;line-height:1.1}
+    .brand p{margin:2px 0 0;color:var(--muted);font-size:12.5px}
+
+    .actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .pill{
+      display:flex;gap:8px;align-items:center;
+      padding:10px 12px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .btn{
+      cursor:pointer;border:none;
+      padding:10px 14px;border-radius:12px;
+      background:linear-gradient(135deg, var(--accent), #ff6a00);
+      color:white;font-weight:700;
+      box-shadow:0 14px 40px rgba(255,59,59,.22);
+      transition:transform .12s ease, filter .12s ease;
+    }
+    .btn:hover{transform:translateY(-1px);filter:brightness(1.02)}
+    .btn:active{transform:translateY(0)}
+    .btn.secondary{
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:none;
+      color:var(--text);
+      font-weight:650;
+    }
+
+    .hero{margin:18px 0 8px;display:grid;gap:14px}
+    .hero-card{
+      padding:18px;border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(20,20,32,.55);
+      box-shadow:0 16px 60px rgba(0,0,0,.35);
+    }
+    .hero-title{
+      margin:0;font-size:22px;letter-spacing:.2px
+    }
+    .hero-sub{
+      margin:8px 0 0;color:var(--muted);line-height:1.5
+    }
+
+    .grid{
+      margin-top:16px;
+      display:grid;gap:14px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+    .card{
+      grid-column: span 4;
+      padding:16px;border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(20,20,32,.75), rgba(20,20,32,.55));
+      box-shadow:0 16px 60px rgba(0,0,0,.35);
+      overflow:hidden;
+      position:relative;
+    }
+    .badge{
+      position:absolute;top:14px;right:14px;
+      font-size:12px;font-weight:800;
+      padding:7px 10px;border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--text);
+      backdrop-filter: blur(8px);
+    }
+    .thumb{
+      height:150px;border-radius:14px;
+      background:
+        radial-gradient(120px 120px at 30% 30%, rgba(255,204,0,.25), transparent 60%),
+        radial-gradient(200px 160px at 70% 30%, rgba(255,59,59,.25), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      display:flex;align-items:flex-end;justify-content:flex-start;
+      padding:12px;
+      margin-bottom:12px;
+    }
+    .thumb span{
+      font-weight:900;
+      background:rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.10);
+      padding:7px 10px;border-radius:12px;
+      font-size:13px;
+    }
+    .name{margin:0;font-size:17px}
+    .desc{margin:8px 0 0;color:var(--muted);font-size:13.5px;line-height:1.5}
+    .row{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      margin-top:14px;
+      padding-top:12px;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    .price{
+      font-size:16px;font-weight:900;
+      letter-spacing:.3px;
+    }
+
+    .qty{
+      display:flex;align-items:center;gap:8px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:12px;padding:6px;
+    }
+    .qty button{
+      width:30px;height:30px;border-radius:10px;border:none;
+      background:rgba(255,255,255,.06);
+      color:var(--text);font-weight:900;cursor:pointer;
+    }
+    .qty input{
+      width:42px;text-align:center;
+      border:none;outline:none;background:transparent;color:var(--text);
+      font-weight:800;
+    }
+
+    .footer{
+      margin:18px 0 6px;
+      display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+      color:var(--muted);font-size:12.5px;
+    }
+
+    .cartbar{
+      position: sticky;
+      bottom: 14px;
+      margin-top:14px;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(20,20,32,.78);
+      backdrop-filter: blur(10px);
+      box-shadow:0 20px 70px rgba(0,0,0,.45);
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    }
+    .cartbar strong{font-size:14px}
+    .cartbar small{color:var(--muted)}
+    .cart-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+
+    .toast{
+      position:fixed;top:16px;left:50%;transform:translateX(-50%);
+      background:rgba(0,0,0,.65);
+      border:1px solid rgba(255,255,255,.12);
+      padding:10px 12px;border-radius:12px;
+      color:var(--text);font-size:13px;
+      opacity:0;pointer-events:none;
+      transition:opacity .2s ease, transform .2s ease;
+      backdrop-filter: blur(8px);
+    }
+    .toast.show{opacity:1; transform:translateX(-50%) translateY(4px);}
+
+    @media (max-width: 900px){
+      .card{grid-column: span 6;}
+    }
+    @media (max-width: 560px){
+      .card{grid-column: span 12;}
+      .hero-title{font-size:20px}
+    }
+  </style>
+</head>
+<body>
+  <div class="toast" id="toast">Tersalin!</div>
+
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">🔥</div>
+        <div>
+          <h1>Ayam Geprek Mantap</h1>
+          <p>Geprek fresh • Sambal nendang • Makan puas</p>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="pill">📍 Parepare • Buka 10.00–22.00</div>
+        <button class="btn secondary" onclick="copyLink()">Salin Link</button>
+        <button class="btn" onclick="scrollToMenu()">Lihat Menu</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card">
+        <h2 class="hero-title">Menu Ayam Geprek Favorit</h2>
+        <p class="hero-sub">
+          Pilih level pedas sesuai mood kamu. Klik tambah/kurang untuk atur jumlah,
+          lalu tekan <b>Pesan Sekarang</b> untuk ringkasan order.
+        </p>
+      </div>
+    </section>
+
+    <section id="menu" class="grid">
+      <!-- CARD 1 -->
+      <article class="card" data-id="original" data-name="Ayam Geprek Original" data-price="18000">
+        <div class="badge">BEST SELLER</div>
+        <div class="thumb"><span>Original</span></div>
+        <h3 class="name">Ayam Geprek Original</h3>
+        <p class="desc">
+          Ayam crispy digeprek + sambal khas. Cocok buat semua level.
+        </p>
+        <div class="row">
+          <div>
+            <div class="price" id="price-original">Rp 18.000</div>
+            <div style="color:var(--muted);font-size:12.5px;margin-top:2px;">Nasi + lalapan</div>
+          </div>
+          <div class="qty">
+            <button onclick="stepQty('original', -1)">−</button>
+            <input id="qty-original" value="0" inputmode="numeric" readonly />
+            <button onclick="stepQty('original', 1)">+</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 2 -->
+      <article class="card" data-id="keju" data-name="Ayam Geprek Keju" data-price="22000">
+        <div class="badge">CHEESY</div>
+        <div class="thumb"><span>Keju</span></div>
+        <h3 class="name">Ayam Geprek Keju</h3>
+        <p class="desc">
+          Geprek original ditambah lelehan keju. Gurih, creamy, bikin nagih.
+        </p>
+        <div class="row">
+          <div>
+            <div class="price" id="price-keju">Rp 22.000</div>
+            <div style="color:var(--muted);font-size:12.5px;margin-top:2px;">Nasi + lalapan</div>
+          </div>
+          <div class="qty">
+            <button onclick="stepQty('keju', -1)">−</button>
+            <input id="qty-keju" value="0" inputmode="numeric" readonly />
+            <button onclick="stepQty('keju', 1)">+</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 3 -->
+      <article class="card" data-id="super" data-name="Ayam Geprek Super Pedes" data-price="20000">
+        <div class="badge" style="border-color: rgba(255,59,59,.35); box-shadow:0 0 0 6px var(--ring);">
+          SUPER PEDES
+        </div>
+        <div class="thumb"><span>Super Pedes</span></div>
+        <h3 class="name">Ayam Geprek Super Pedes</h3>
+        <p class="desc">
+          Buat yang berani! Sambal extra pedas, bisa pilih level 5–10.
+        </p>
+        <div class="row">
+          <div>
+            <div class="price" id="price-super">Rp 20.000</div>
+            <div style="color:var(--muted);font-size:12.5px;margin-top:2px;">Nasi + lalapan</div>
+          </div>
+          <div class="qty">
+            <button onclick="stepQty('super', -1)">−</button>
+            <input id="qty-super" value="0" inputmode="numeric" readonly />
+            <button onclick="stepQty('super', 1)">+</button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="cartbar">
+      <div>
+        <strong id="cartTitle">Total: Rp 0</strong><br/>
+        <small id="cartDetail">Belum ada pesanan</small>
+      </div>
+      <div class="cart-actions">
+        <button class="btn secondary" onclick="resetCart()">Reset</button>
+        <button class="btn" onclick="orderNow()">Pesan Sekarang</button>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div>© <span id="year"></span> Ayam Geprek Mantap</div>
+      <div>💬 WA Order: ganti nomor di kode (lihat fungsi <b>orderNow()</b>)</div>
+    </div>
+  </div>
+
+  <script>
+    const menu = {
+      original: { name: "Ayam Geprek Original", price: 18000, qty: 0 },
+      keju:     { name: "Ayam Geprek Keju",     price: 22000, qty: 0 },
+      super:    { name: "Ayam Geprek Super Pedes", price: 20000, qty: 0 }
+    };
+
+    const rupiah = (n) => "Rp " + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function stepQty(id, delta){
+      menu[id].qty = Math.max(0, menu[id].qty + delta);
+      document.getElementById("qty-" + id).value = menu[id].qty;
+      updateCartBar();
+    }
+
+    function updateCartBar(){
+      const items = Object.values(menu).filter(i => i.qty > 0);
+      const total = items.reduce((s,i) => s + (i.qty * i.price), 0);
+
+      document.getElementById("cartTitle").textContent = "Total: " + rupiah(total);
+
+      if(items.length === 0){
+        document.getElementById("cartDetail").textContent = "Belum ada pesanan";
+      } else {
+        const detail = items.map(i => `${i.qty}x ${i.name}`).join(" • ");
+        document.getElementById("cartDetail").textContent = detail;
+      }
+    }
+
+    function resetCart(){
+      for(const k in menu){
+        menu[k].qty = 0;
+        document.getElementById("qty-" + k).value = 0;
+      }
+      updateCartBar();
+      showToast("Pesanan direset");
+    }
+
+    function orderNow(){
+      const items = Object.values(menu).filter(i => i.qty > 0);
+      if(items.length === 0){
+        showToast("Pilih menu dulu ya 🙂");
+        return;
+      }
+
+      const total = items.reduce((s,i) => s + (i.qty * i.price), 0);
+      const lines = items.map(i => `- ${i.qty}x ${i.name} (${rupiah(i.price)})`);
+      const msg =
+`Halo, saya mau pesan:
+${lines.join("\n")}
+
+Total: ${rupiah(total)}
+Catatan: (isi alamat / level pedas / dll)`;
+
+      // GANTI nomor WA di bawah ini (format: kode negara tanpa +)
+      const waNumber = "6281234567890";
+      const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
+      window.open(url, "_blank");
+    }
+
+    function scrollToMenu(){
+      document.getElementById("menu").scrollIntoView({behavior:"smooth", block:"start"});
+    }
+
+    function copyLink(){
+      navigator.clipboard.writeText(window.location.href);
+      showToast("Link tersalin!");
+    }
+
+    function showToast(text){
+      const t = document.getElementById("toast");
+      t.textContent = text;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 1400);
+    }
+
+    updateCartBar();
+  </script>
+</body>
+</html>
